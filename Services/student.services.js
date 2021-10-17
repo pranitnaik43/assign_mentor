@@ -7,6 +7,10 @@ const service = {
     const data = await db.students.find().toArray();
     res.send(data);
   },
+  async getStudentFromId(studentId) {
+    var student = await db.students.findOne({ _id: new ObjectId(studentId) });
+    return student;
+  },
   async getStudentsWithNoMentor(req, res) {
     const students = await db.students.find().toArray();
     const studentsWithNoMentor = students.filter(student => {

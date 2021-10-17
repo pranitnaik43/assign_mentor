@@ -23,7 +23,8 @@ const mentorServices = require("./Services/mentor.services");
   app.post("/student/assignMentor", (req, res) => studentServices.assignMentorToStudent(req, res));
   
   //mentor routes
-  app.get("/mentor/all", (req, res) =>mentorServices.getAllMentors(req, res));
+  app.get("/mentor/all", (req, res) => mentorServices.getAllMentors(req, res));
+  app.get("/mentor/getStudents", (req, res) => mentorServices.getStudentsForMentor(req, res));
   app.post("/mentor/create", (req, res) => mentorServices.createMentor(req, res));
   app.post("/mentor/assignStudents", (req, res) => mentorServices.assignStudentsToMentor(req, res));          
 

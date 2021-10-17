@@ -8,6 +8,20 @@ const service = {
     const data = await db.mentors.find().toArray();
     res.send(data);
   },
+  async getStudentsForMentor(req, res) {
+    const mentorId = req.body.mentor;
+    const mentor = await db.mentors.findOne({ _id: new ObjectId(mentorId) });
+    if(!mentor) { 
+      return res.send({ error: { message: "Mentor does not exists" }});
+    }
+    let students = [];
+    for (let studentId of mentor.students) {
+      var student = await studentServices.getStudentFromId(studentId);
+      students.push(student);
+    }
+    // console.log(students);
+    res.send(students);
+  },
   async createMentor(req, res) {
     //Validate request body 
     const { error } = await mentorObj.validate(req.body);
