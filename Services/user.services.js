@@ -1,4 +1,4 @@
-const db = require("..mongo/");
+const db = require("../mongo");
 const { ObjectId } = require("mongodb");
 
 const users = db.collections("users");
