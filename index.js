@@ -9,6 +9,7 @@ const PORT = (process.env.PORT) ? (process.env.PORT) : 3000;
 
 const studentServices = require("./Services/student.services");
 const mentorServices = require("./Services/mentor.services");
+const userServices = require("./Services/user.services");
 
 (async function load() {
   await db.connect();
@@ -26,7 +27,16 @@ const mentorServices = require("./Services/mentor.services");
   app.get("/mentor/all", (req, res) => mentorServices.getAllMentors(req, res));
   app.get("/mentor/getStudents", (req, res) => mentorServices.getStudentsForMentor(req, res));
   app.post("/mentor/create", (req, res) => mentorServices.createMentor(req, res));
-  app.post("/mentor/assignStudents", (req, res) => mentorServices.assignStudentsToMentor(req, res));          
+  app.post("/mentor/assignStudents", (req, res) => mentorServices.assignStudentsToMentor(req, res));   
+  
+  //user routes
+  app.get("/users", (req, res) => mentorServices.getAllMentors(req, res));
+  app.post("/users");
+  app.put("/users/:id");
+  app.get("/profile/:userId");
+  app.post("profile/:userId");
+  app.put("profile/:userId");
+
 
   app.listen(PORT, () => {
     console.log(`Server running at port ${PORT}`);
