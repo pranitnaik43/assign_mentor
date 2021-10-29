@@ -44,7 +44,7 @@ const service = {
       }
     }
     // get new mentor data
-    const newMentor = db.mentors.findOne({_id: mentorId});
+    const newMentor = await db.mentors.findOne({_id: mentorId});
 
     //check if mentor exists
     if(!newMentor) { 
