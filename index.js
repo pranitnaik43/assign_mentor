@@ -14,8 +14,8 @@ const userServices = require("./Services/user.services");
 (async function load() {
   await db.connect();
 
-  app.use(cors());
   app.use(express.json());
+  app.use(cors());
 
   //student routes
   app.get("/student/all", (req, res) => studentServices.getAllStudents(req, res));
@@ -30,13 +30,11 @@ const userServices = require("./Services/user.services");
   app.post("/mentor/assignStudents", (req, res) => mentorServices.assignStudentsToMentor(req, res));   
   
   //user routes
-  app.get("/users", (req, res) => mentorServices.getAllMentors(req, res));
-  app.post("/users");
-  app.put("/users/:id");
-  app.get("/profile/:userId");
-  app.post("profile/:userId");
-  app.put("profile/:userId");
-
+  app.get("/users", (req, res) => userServices.getUsers(req, res));
+  app.get("/users/:id", (req, res) => userServices.getUserFromId(req, res));
+  app.post("/users/create", (req, res) => userServices.newUser(req, res));
+  app.put("/users/:id", (req, res) => userServices.updateUser(req, res));
+  app.delete("/users/:id", (req, res) => userServices.deleteUser(req, res));
 
   app.listen(PORT, () => {
     console.log(`Server running at port ${PORT}`);
