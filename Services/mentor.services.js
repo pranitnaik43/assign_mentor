@@ -44,9 +44,10 @@ const service = {
     const student_ids = req.body.students;
 
     //assign mentor to each student
-    student_ids.forEach(id => {
-      studentServices.studentMentorAssignment(new ObjectId(id), mentor_id);
-    });
+    for (const id of student_ids) {
+      var result = await studentServices.studentMentorAssignment(new ObjectId(id), mentor_id);
+      if(result.error) { return res.send(result); }
+    }
 
     res.send({success: { message: "Students assigned successfully"}});
   }

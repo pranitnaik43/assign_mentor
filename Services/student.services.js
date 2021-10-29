@@ -92,8 +92,7 @@ const service = {
     let mentor_id = new ObjectId(req.body.mentor);
     
     //assign mentor to student
-    let result =  this.studentMentorAssignment(student_id, mentor_id);
-
+    let result =  await this.studentMentorAssignment(student_id, mentor_id);
     if(result.error) { return res.send(result); }
 
     res.send({ success: { message: "Mentor assigned successfully" } });
