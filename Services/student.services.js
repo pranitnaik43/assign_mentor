@@ -36,11 +36,11 @@ const service = {
       const oldMentor = await db.mentors.findOne({_id: oldMentorId});
 
       // remove the student from the old mentor's list
-      if(oldMentor.students) {
+      if(oldMentor && oldMentor.students) {
         oldMentor.students = oldMentor.students.filter(id => (id.toHexString()!==studentId.toHexString() ));
-        // console.log(oldMentor);
+        console.log(oldMentor);
         //update the old mentor's data
-        await db.mentors.updateOne({_id: oldMentor.id}, {$set: { ...oldMentor } });
+        await db.mentors.updateOne({_id: oldMentorId}, {$set: { ...oldMentor } });
       }
     }
     // get new mentor data
